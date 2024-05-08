@@ -10,15 +10,23 @@ The best was the "submission_new_hpo" or in the Hyperparameter Optimization step
 
 ## Exploratory data analysis and feature creation
 ### What did the exploratory analysis find and how did you add additional features?
-Some of them are:
 
-- Temperature and Feels-Like Temperature (atemp): These histograms show a roughly normal distribution centered around 20-30 degrees Celsius.
-- Humidity: The distribution of humidity is fairly wide-ranging, which could influence riding habits depending on personal comfort.
-- Windspeed: Most of the data points indicate low windspeeds with a suggestion that high winds are less common.
-- Casual vs. Registered Users: The histogram (Step 4: Exploratory Data Analysis and Creating an additional feature) shows most values are low, indicating fewer casual rides, while registered user counts are higher, suggesting a steady user base.
+The EDA process led to several key discoveries:
+
+- Temperature and Feels-Like Temperature (atemp): Showed a normal distribution around 20-30 degrees Celsius, suggesting optimal biking conditions.
+- Humidity: Revealed a wide range of values, influencing riding preferences and habits.
+- Windspeed: Indicated that lower windspeeds are more common, which are favorable for biking.
+- Casual vs. Registered Users: Data showed higher usage among registered compared to casual users, suggesting differing usage patterns that could inform targeted modeling strategies.
+
+These findings prompted the creation of new features like time-based (hour, month) and categorical weather conditions, directly enhancing the model's predictive power by aligning it more closely with real-world usage patterns.
+
+
+
+
 
 ### How much better did your model preform after adding additional features and why do you think that is?
-Incorporating time-based functions in "hour" and "month" along with categorization of important variables such as "season" and "weather". These characteristics relate directly to observable patterns in bike rental behavior: higher rentals during specific times of the day and particular months of the year.
+The incorporation of new features resulted in an improved Kaggle score from 1.80894 to 0.92836. This improvement was primarily due to the model's enhanced ability to capture complex patterns and relationships within the data, particularly those related to time and weather, which are critical determinants of bike-sharing demand.
+
 
 ## Hyper parameter tuning
 ### How much better did your model preform after trying different hyper parameters?
@@ -33,12 +41,23 @@ Hyperparameter optimization adjusted aspects of the model, such as learning rate
 ### If you were given more time with this dataset, where do you think you would spend more time?
 I would like to do a deeper analysis of the data, to better have a model without being overtrained, I think there may be something in the use of more categories such as working days. and see the results
 
+
 ### Create a table with the models you ran, the hyperparameters modified, and the kaggle score.
 |model|hpo1|hpo2|hpo3|score|
 |--|--|--|--|--|
 |initial|GBM: default settings	|NN: default settings	|CAT: default settings	|1.80894|
 |add_features|GBM: default settings	|NN: default settings	|CAT: default settings	|0.92836|
 |hpo|GBM: num_boost_round: 150, 250	|NN_TORCH: num_epochs: 20, 40	|CAT: iterations: 150, 250	|0.47327|
+
+|model|hpo1|score|
+|--|--|--|--|--|
+|initial|Default settings	|1.80894|
+|add_features|Added temporal features|0.92836|
+|hpo|Optimized parameters|0.47327|
+
+the best model is "WeightedEnsemble_L3"
+
+![model_train_score.png](Model-Scores.png)
 
 ### Create a line plot showing the top model score for the three (or more) training runs during the project.
 
@@ -51,4 +70,4 @@ I would like to do a deeper analysis of the data, to better have a model without
 ![model_test_score.png](img-code-report-template/top_model_scores_kaggle.png)
 
 ## Summary
-TODO: Add your explanation
+The journey from initial model training to hyperparameter optimization illustrates a clear trajectory of improvement, underscored by strategic data analysis and feature engineering. Each phase of the project not only enhanced the model's accuracy but also deepened our understanding of key drivers affecting bike-sharing demand.
